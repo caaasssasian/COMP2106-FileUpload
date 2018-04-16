@@ -8,7 +8,12 @@
   <body>
     <h1><%= title %></h1>
 		<!-- message -->
-		<%= typeof msg != 'undefined' ? msg : '' %>
+		<% if(msgType == 'none'){
+
+		}else {%>
+			<p class="<%= msgType %>"><%= typeof msg != 'undefined' ? msg : '' %></p>
+		<%}%>
+		<!-- <%= typeof msg != 'undefined' ? msg : '' %> -->
 
 		<!-- form -->
 		<form action="/upload" method="POST" enctype="multipart/form-data">
@@ -18,9 +23,17 @@
 		  </div>
 			<button type="submit" class="btn btn-primary">Upload</button>
 		</form>
+		<%if(showImage == false) {
 
-		<!-- view image -->
-
+		} else {%>
+			<!--delete image-->
+			<form action="/delete" method="post" style=" margin: 20px 0px 20px 0px;">
+				<input style="display: none;" type="text" name="file" value="<%= typeof file != 'undefined' ? file : '' %>">
+				<button type="submit" name="delete" class="btn btn-danger">Delete image</button>
+			</form>
+			<!-- view image -->
+			<img src="<%= typeof file != 'undefined' ? file : '' %>" alt="<%= typeof file != 'undefined' ? file : '' %>">
+		<%}%>
 		<div>
 
 		</div>
