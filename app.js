@@ -52,29 +52,30 @@ app.post('/upload', (req, res) => {
     upload(req,res, (err) =>{
        if(err){
            res.render('index', {
-						title: 'File Upload',
-						msgType: 'alert alert-danger',
-						showImage: false,
-            msg: err
+				title: 'File Upload',
+				msgType: 'alert alert-danger',
+				showImage: false,
+            	msg: err
            });
-       } else{
-					if(req.file == undefined) {
-						res.render('index', {
-							title: 'File Upload',
-							msgType: 'alert alert-danger',
-							showImage: false,
-							msg: 'No File selected'
-						});
-					} else {
-						console.log(req.file);
-						res.render('index', {
-							title: 'File Upload',
-							msgType: 'alert alert-success',
-							msg: 'File has Uploaded',
-							showImage: true,
-							file: `/uploads/${req.file.filename}`
-					});
-				}
+	   } 
+	   else {
+			if(req.file == undefined) {
+				res.render('index', {
+					title: 'File Upload',
+					msgType: 'alert alert-danger',
+					showImage: false,
+					msg: 'No File selected'
+				});
+			} else {
+				console.log(req.file);
+				res.render('index', {
+					title: 'File Upload',
+					msgType: 'alert alert-success',
+					msg: 'File has Uploaded',
+					showImage: true,
+					file: `/uploads/${req.file.filename}`
+			});
+		}
        }
     });
 });
@@ -85,19 +86,19 @@ app.post('/delete', (req, res, next) => {
 	// delet the file using the fs
 	try {
 		fs.unlinkSync(file);
-				res.render('index', {
-					title: 'File Upload',
-					msgType: 'alert alert-primary',
-					showImage: false,
-					msg: 'File deleted'
-				});
+		res.render('index', {
+			title: 'File Upload',
+			msgType: 'alert alert-primary',
+			showImage: false,
+			msg: 'File deleted'
+		});
 	} catch (err) {
-				res.render('index', {
-					title: 'File Upload',
-					msgType: 'alert alert-danger',
-					showImage: false,
-					msg: err
-				});
+		res.render('index', {
+			title: 'File Upload',
+			msgType: 'alert alert-danger',
+			showImage: false,
+			msg: err
+		});
 	}
 });
 // file check function
